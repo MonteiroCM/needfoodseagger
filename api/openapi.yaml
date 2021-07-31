@@ -1,0 +1,671 @@
+openapi: 3.0.3
+info:
+  title: Need Food 🍔
+  description: "Esse e o Servidor do Need Food.  Você pode achar mais sobre em [Need\
+    \ Food](https://dashboard.heroku.com/pipelines/e2cb2920-0983-4b92-8c9d-9e9d0322cc5e)\
+    \  `special-key` para realizar certas demandas"
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: clayton.monteiro@gmail.com
+  version: 1.0.0
+servers:
+- url: https://60fc92bf38907c0017e8fa70.mockapi.io/api/v1/
+  description: "API de Teste - [mockAPI]"
+tags:
+- name: Clientes
+  description: Operações sobre Clientes
+- name: Categorias
+  description: Operações sobre categoria
+- name: Tamanhos
+  description: Operações sobre a Classificação de tamanho
+- name: Produtos
+  description: Operações sobre Produtos
+paths:
+  /Tamanhos:
+    get:
+      tags:
+      - Tamanhos
+      summary: Recupera todos os tamanhos
+      operationId: tamanhosGET
+      responses:
+        "200":
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tamanhos'
+      x-swagger-router-controller: Tamanhos
+    post:
+      tags:
+      - Tamanhos
+      summary: Adicionar um novo tamanho
+      operationId: tamanhosPOST
+      requestBody:
+        description: Usado para Inserir um novo tamanho na base de dados
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tamanho'
+        required: true
+      responses:
+        "201":
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tamanhos'
+      x-swagger-router-controller: Tamanhos
+  /Tamanhos/{tamanhoID}:
+    get:
+      tags:
+      - Tamanhos
+      summary: Procurar Tamanho pelo ID
+      description: Retorna o Produdo com o ID informado
+      operationId: getTamanhoById
+      parameters:
+      - name: tamanhoID
+        in: path
+        description: ID do tamanho a ser retornado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tamanho'
+      x-swagger-router-controller: Tamanhos
+    put:
+      tags:
+      - Tamanhos
+      summary: Atualizar Tamanho
+      description: Atualiza o Produdo com o ID informado
+      operationId: putTamanhoById
+      parameters:
+      - name: tamanhoID
+        in: path
+        description: ID do tamanho a ser retornado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: Dados
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TamanhoFull'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tamanho'
+      x-swagger-router-controller: Tamanhos
+    delete:
+      tags:
+      - Tamanhos
+      summary: Deletar Tamanho pelo ID
+      description: Remover o Produdo com o ID informado
+      operationId: deleteTamanhoById
+      parameters:
+      - name: tamanhoID
+        in: path
+        description: ID do tamanho a ser retornado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tamanho'
+        "404":
+          description: Not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Not found
+                x-content-type: text/plain
+      x-swagger-router-controller: Tamanhos
+  /Produtos:
+    get:
+      tags:
+      - Produtos
+      summary: Recupera todos os produtos
+      operationId: produtosGET
+      responses:
+        "200":
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProdutosFull'
+      x-swagger-router-controller: Produtos
+    post:
+      tags:
+      - Produtos
+      summary: Adicionar um novo produto
+      operationId: produtosPOST
+      requestBody:
+        description: Usado para Inserir um novo produto na base de dados
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+        required: true
+      responses:
+        "201":
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProdutoFull'
+      x-swagger-router-controller: Produtos
+  /Produtos/{produtoID}:
+    get:
+      tags:
+      - Produtos
+      summary: Procurar Produto pelo ID
+      description: Retorna o Produdo com o ID informado
+      operationId: getProdutoById
+      parameters:
+      - name: produtoID
+        in: path
+        description: ID do produto a ser retornado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+      x-swagger-router-controller: Produtos
+    put:
+      tags:
+      - Produtos
+      summary: Atualizar Produto
+      description: Atualiza o Produdo com o ID informado
+      operationId: putProdutoById
+      parameters:
+      - name: produtoID
+        in: path
+        description: ID do produto a ser retornado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: Dados
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProdutoFull'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+      x-swagger-router-controller: Produtos
+    delete:
+      tags:
+      - Produtos
+      summary: Deletar Produto pelo ID
+      description: Remover o Produdo com o ID informado
+      operationId: deleteProdutoById
+      parameters:
+      - name: produtoID
+        in: path
+        description: ID do produto a ser retornado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        "404":
+          description: Not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Not found
+                x-content-type: text/plain
+      x-swagger-router-controller: Produtos
+  /Clientes:
+    get:
+      tags:
+      - Clientes
+      summary: Recupera todos os Clientes
+      operationId: clientesGET
+      responses:
+        "200":
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Clientes'
+      x-swagger-router-controller: Clientes
+    post:
+      tags:
+      - Clientes
+      summary: Adicionar um novo produto
+      operationId: clientesPOST
+      requestBody:
+        description: Usado para Inserir um novo produto na base de dados
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+            examples:
+              Exemplo:
+                value:
+                  name: Bruce Willis
+                  email: Bruce.Willis@hollywood.com
+                  password: 123456
+        required: true
+      responses:
+        "201":
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+      x-swagger-router-controller: Clientes
+  /Clientes/{clienteID}:
+    get:
+      tags:
+      - Clientes
+      summary: Procurar Cliente pelo ID
+      description: Retorna o Cliente com o ID informado
+      operationId: getClienteById
+      parameters:
+      - name: clienteID
+        in: path
+        description: ID do Cliente a ser retornado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClienteFull'
+      x-swagger-router-controller: Clientes
+    put:
+      tags:
+      - Clientes
+      summary: Atualizar Cliente
+      description: Atualiza o Cliente com o ID informado
+      operationId: putClienteById
+      parameters:
+      - name: clienteID
+        in: path
+        description: ID do cliente a ser retornado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: Dados
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        "200":
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClienteFull'
+      x-swagger-router-controller: Clientes
+    delete:
+      tags:
+      - Clientes
+      summary: Deletar Cliente pelo ID
+      description: Remover o Cliente com o ID informado
+      operationId: deleteClienteById
+      parameters:
+      - name: clienteID
+        in: path
+        description: ID do cliente a ser retornado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClienteFull'
+        "404":
+          description: Not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Not found
+                x-content-type: text/plain
+      x-swagger-router-controller: Clientes
+  /Categorias:
+    get:
+      tags:
+      - Categorias
+      summary: Recupera todos os Categorias
+      operationId: categoriasGET
+      responses:
+        "200":
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categorias'
+      x-swagger-router-controller: Categorias
+    post:
+      tags:
+      - Categorias
+      summary: Adicionar um novo produto
+      operationId: categoriasPOST
+      requestBody:
+        description: Usado para Inserir um novo produto na base de dados
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Categoria'
+            examples:
+              Exemplo:
+                value:
+                  name: Bruce Willis
+                  email: Bruce.Willis@hollywood.com
+                  password: 123456
+        required: true
+      responses:
+        "201":
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+      x-swagger-router-controller: Categorias
+  /Categorias/{categoriaID}:
+    get:
+      tags:
+      - Categorias
+      summary: Procurar Categoria pelo ID
+      description: Retorna o Categoria com o ID informado
+      operationId: getCategoriaById
+      parameters:
+      - name: categoriaID
+        in: path
+        description: ID do Categoria a ser retornado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoriaFull'
+      x-swagger-router-controller: Categorias
+    put:
+      tags:
+      - Categorias
+      summary: Atualizar Categoria
+      description: Atualiza o Categoria com o ID informado
+      operationId: putCategoriaById
+      parameters:
+      - name: categoriaID
+        in: path
+        description: ID do categoria a ser retornado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: Dados
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Categoria'
+      responses:
+        "200":
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoriaFull'
+      x-swagger-router-controller: Categorias
+    delete:
+      tags:
+      - Categorias
+      summary: Deletar Categoria pelo ID
+      description: Remover o Categoria com o ID informado
+      operationId: deleteCategoriaById
+      parameters:
+      - name: categoriaID
+        in: path
+        description: ID do categoria a ser retornado
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoriaFull'
+        "404":
+          description: Not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Not found
+                x-content-type: text/plain
+      x-swagger-router-controller: Categorias
+components:
+  schemas:
+    Produto:
+      type: object
+      properties:
+        nome:
+          type: string
+        descricao:
+          type: string
+        categoria_id:
+          type: string
+          format: uuid
+        estabelecimento_id:
+          type: string
+          format: uuid
+        ativo:
+          type: boolean
+      example:
+        estabelecimento_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ativo: true
+        nome: nome
+        categoria_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        descricao: descricao
+    ProdutoFull:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        descricao:
+          type: string
+        categoria_id:
+          type: string
+          format: uuid
+        estabelecimento_id:
+          type: string
+          format: uuid
+        ativo:
+          type: boolean
+      example:
+        estabelecimento_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ativo: true
+        nome: nome
+        id: 0
+        categoria_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        descricao: descricao
+    ProdutosFull:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProdutoFull'
+    Tamanho:
+      type: object
+      properties:
+        nome:
+          type: string
+        porcentagem:
+          type: number
+        estabelecimento_id:
+          type: string
+          format: uuid
+        ativo:
+          type: boolean
+      example:
+        estabelecimento_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ativo: true
+        porcentagem: 0.80082819046101150206595775671303272247314453125
+        nome: nome
+    TamanhoFull:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        porcentagem:
+          type: number
+        estabelecimento_id:
+          type: string
+          format: uuid
+        ativo:
+          type: boolean
+      example:
+        estabelecimento_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ativo: true
+        porcentagem: 6.02745618307040320615897144307382404804229736328125
+        nome: nome
+        id: 0
+    Tamanhos:
+      type: array
+      items:
+        $ref: '#/components/schemas/TamanhoFull'
+    Cliente:
+      type: object
+      properties:
+        nome:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    ClienteFull:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        password: password
+        nome: nome
+        id: 0
+        email: email
+    Clientes:
+      type: array
+      items:
+        $ref: '#/components/schemas/ClienteFull'
+    Categoria:
+      type: object
+      properties:
+        nome:
+          type: string
+        estabelecimento_id:
+          type: string
+          format: uuid
+        ativo:
+          type: boolean
+    CategoriaFull:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        estabelecimento_id:
+          type: string
+          format: uuid
+        ativo:
+          type: boolean
+      example:
+        estabelecimento_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ativo: true
+        nome: nome
+        id: 0
+    Categorias:
+      type: array
+      items:
+        $ref: '#/components/schemas/CategoriaFull'
